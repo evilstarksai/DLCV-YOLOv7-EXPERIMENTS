@@ -1,0 +1,16 @@
+# COCO 2017 dataset http://cocodataset.org
+
+# download command/URL (optional)
+#download: bash ./scripts/get_coco.sh
+
+# train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
+path: ../datasets/pipe
+train: ../datasets/pipe/images/train2021  # 118287 images
+val: ../datasets/pipe/images/val2021  # 5000 images
+test: ../datasets/pipe/images/test2021  # 20288 of 40670 images, submit to https://competitions.codalab.org/competitions/20794
+
+# number of classes
+nc: 8
+
+# class names
+names: [ 'air-hole', 'hollow-bead', 'slag-inclusion', 'bite-edge', 'broken-arc', 'crack', 'overlap', 'unfused']
