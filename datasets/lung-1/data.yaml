@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 5
+names: ['bacterial_pneumonia', 'coronavirus', 'normal_lung', 'tuberculosis', 'viral_pneumonia']
+
+roboflow:
+  workspace: capstone-project-1dagp
+  project: detection-of-pulmonary-diseases
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/capstone-project-1dagp/detection-of-pulmonary-diseases/dataset/3

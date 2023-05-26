@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['0']
+
+roboflow:
+  workspace: intelipro
+  project: breast-cancer-jhv7w
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/intelipro/breast-cancer-jhv7w/dataset/1
