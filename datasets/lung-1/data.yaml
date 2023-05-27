@@ -1,6 +1,6 @@
-train: ../train/images
-val: ../valid/images
-test: ../test/images
+train: ../datasets/lung-1/train/images
+val: ../datasets/lung-1/valid/images
+test: ../datasets/lung-1/test/images
 
 nc: 5
 names: ['bacterial_pneumonia', 'coronavirus', 'normal_lung', 'tuberculosis', 'viral_pneumonia']
