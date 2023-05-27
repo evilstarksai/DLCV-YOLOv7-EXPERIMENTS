@@ -17,31 +17,31 @@ backbone:
 
   [-1, 1, Conv, [32, 1, 1, None, 1, nn.PReLU()]],
   [-2, 1, Conv, [32, 1, 1, None, 1, nn.PReLU()]],
-  [-1, 1, Conv, [32, 3, 1, None, 1, nn.PReLU()]],
+  [-1, 1, CBAM, [32]], # 25
   [[-1, -2, -3], 1, Concat, [1]],
   [-1, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],  # 6
 
   [-1, 1, MP, []],  # 7-P3/8
   [-1, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
   [-2, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
-  [-1, 1, Conv, [64, 3, 1, None, 1, nn.PReLU()]],
+  [-1, 1, CBAM, [64]], # 25
   [[-1, -2, -3], 1, Concat, [1]],
   [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],  # 12
 
   [-1, 1, MP, []],  # 13-P4/16
   [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],
   [-2, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],
-  [-1, 1, Conv, [128, 3, 1, None, 1, nn.PReLU()]],
+  [-1, 1, CBAM, [128]], # 25
   [[-1, -2, -3], 1, Concat, [1]],
   [-1, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]],  # 18
 
   [-1, 1, MP, []],  # 19-P5/32
   [-1, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]],
   [-2, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]],
-  [-1, 1, Conv, [256, 3, 1, None, 1, nn.PReLU()]],
+  [-1, 1, CBAM, [256]], # 25
   [[-1, -2, -3], 1, Concat, [1]],
   [-1, 1, Conv, [512, 1, 1, None, 1, nn.PReLU()]],  
-  [-1, 1, eca_layer, [512]], # 25
+  [-1, 1, CBAM, [512]], # 25
   ]
 
 head:
@@ -63,7 +63,7 @@ head:
 
   [-1, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
   [-2, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
-  [-1, 1, Conv, [64, 3, 1, None, 1, nn.PReLU()]],
+  [-1, 1, eca_layer, [64]], # 25
   [[-1, -2, -3], 1, Concat, [1]],
   [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],  # 44
 
@@ -74,7 +74,7 @@ head:
 
   [-1, 1, Conv, [32, 1, 1, None, 1, nn.PReLU()]],
   [-2, 1, Conv, [32, 1, 1, None, 1, nn.PReLU()]],
-  [-1, 1, Conv, [32, 3, 1, None, 1, nn.PReLU()]],
+  [-1, 1, eca_layer, [32]], # 25
   [[-1, -2, -3], 1, Concat, [1]],
   [-1, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],  # 53
 
@@ -83,7 +83,7 @@ head:
 
   [-1, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
   [-2, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
-  [-1, 1, Conv, [64, 3, 1, None, 1, nn.PReLU()]],
+  [-1, 1, eca_layer, [64]], # 25
   [[-1, -2, -3], 1, Concat, [1]],
   [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],  # 60
 
@@ -92,7 +92,7 @@ head:
 
   [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],
   [-2, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],
-  [-1, 1, Conv, [128, 3, 1, None, 1, nn.PReLU()]],
+  [-1, 1, eca_layer, [128]], # 25
   [[-1, -2, -3], 1, Concat, [1]],
   [-1, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]], #67
 
