@@ -2495,7 +2495,7 @@ class ST2CSPC(nn.Module):
 from models.conv import conv1x1, conv3x3, conv7x7
 
 class BAM(nn.Module):
-    def __init__(self, c1, reduction_ratio=16, dilation=4):
+    def __init__(self, c1, c2=None, reduction_ratio=16, dilation=4):
         super(BAM, self).__init__()
         self.hid_channel = c1 // reduction_ratio
         self.dilation = dilation
@@ -2555,7 +2555,7 @@ class BAM(nn.Module):
 
 #To-do:
 class CBAM(nn.Module):
-    def __init__(self, c1, reduction_ratio=16, dilation=1):
+    def __init__(self, c1, c2=None, reduction_ratio=16, dilation=1):
         super(CBAM, self).__init__()
         self.hid_channel = c1 // reduction_ratio
         self.dilation = dilation
