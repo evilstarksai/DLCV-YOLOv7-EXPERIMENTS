@@ -10,7 +10,7 @@ val: ../datasets/neudet/images/val  # 5000 images
 test: ../datasets/neudet/images/test  # 20288 of 40670 images, submit to https://competitions.codalab.org/competitions/20794
 
 # number of classes
-nc: 8
+nc: 6
 
 # class names
 names: ["crazing", "patches", "inclusion", "pitted_surface", "rolled-in_scale", "scratches"]
