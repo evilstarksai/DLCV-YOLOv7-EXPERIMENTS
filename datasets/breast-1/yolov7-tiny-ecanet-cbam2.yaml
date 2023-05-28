@@ -1,0 +1,100 @@
+# parameters
+nc: 8  # number of classes
+depth_multiple: 1.0  # model depth multiple
+width_multiple: 1.0  # layer channel multiple
+
+# anchors
+anchors:
+  - [10,13, 16,30, 33,23]  # P3/8
+  - [30,61, 62,45, 59,119]  # P4/16
+  - [116,90, 156,198, 373,326]  # P5/32
+# Output Size = (Input Size - Kernel Size + 2 * Padding) / Stride + 1
+backbone:
+  # [from, number, module, args] c2, k=1, s=1, p=None, g=1, act=True
+  [[-1, 1, Conv, [32, 3, 2, None, 1, nn.PReLU()]],  # 0-P1/2
+
+  [-1, 1, Conv, [64, 3, 2, None, 1, nn.PReLU()]],  # 1-P2/4
+
+  [-1, 1, Conv, [32, 1, 1, None, 1, nn.PReLU()]],
+  [-2, 1, Conv, [32, 1, 1, None, 1, nn.PReLU()]],
+  [-1, 1, Conv, [32, 3, 1, None, 1, nn.PReLU()]],
+  [[-1, -2, -3], 1, Concat, [1]],
+  [-1, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],  # 6
+
+  [-1, 1, MP, []],  # 7-P3/8
+  [-1, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
+  [-2, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
+  [-1, 1, Conv, [64, 3, 1, None, 1, nn.PReLU()]],
+  [[-1, -2, -3], 1, Concat, [1]],
+  [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],  # 12
+  
+
+  [-1, 1, MP, []],  # 13-P4/16
+  [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],
+  [-2, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],
+  [-1, 1, Conv, [128, 3, 1, None, 1, nn.PReLU()]],
+  [[-1, -2, -3], 1, Concat, [1]],
+  [-1, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]],  # 18
+
+  [-1, 1, MP, []],  # 19-P5/32
+  [-1, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]],
+  [-2, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]],
+  [-1, 1, Conv, [256, 3, 1, None, 1, nn.PReLU()]],
+  [[-1, -2, -3], 1, Concat, [1]],
+  [-1, 1, Conv, [512, 1, 1, None, 1, nn.PReLU()]],  
+  [-1, 1, eca_layer, [512]], # 25
+  ]
+
+head:
+   [[-1, 1, SPPCSPC, [512]], # 26
+   [-1, 1, Conv, [256, 1, 1]],
+   [-1, 1, nn.Upsample, [None, 2, 'nearest']],
+   [18, 1, Conv, [256, 1, 1]], # route backbone P4
+   [[-1, -2], 1, Concat, [1]],
+
+  [-1, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
+  [-2, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
+  [-1, 1, Conv, [64, 3, 1, None, 1, nn.PReLU()]],
+  [[-1, -2, -3], 1, Concat, [1]],
+  [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],  # 35
+
+  [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],
+  [-1, 1, nn.Upsample, [None, 2, 'nearest']],
+  [12, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]], # route backbone P3
+  [[-1, -2], 1, Concat, [1]],
+
+  [-1, 1, Conv, [32, 1, 1, None, 1, nn.PReLU()]],
+  [-2, 1, Conv, [32, 1, 1, None, 1, nn.PReLU()]],
+  [-1, 1, Conv, [32, 3, 1, None, 1, nn.PReLU()]],
+  [[-1, -2, -3], 1, Concat, [1]],
+  [-1, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],  # 44
+
+  [-1, 1, CBAM, [64]],
+
+  [-1, 1, Conv, [128, 3, 2, None, 1, nn.PReLU()]],
+  [[-1, 35], 1, Concat, [1]],
+
+  [-1, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
+  [-2, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
+  [-1, 1, Conv, [64, 3, 1, None, 1, nn.PReLU()]],
+  [[-1, -2, -3], 1, Concat, [1]],
+  [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],  # 52
+
+  [-1, 1, CBAM, [128]],
+
+  [-1, 1, Conv, [256, 3, 2, None, 1, nn.PReLU()]],
+  [[-1, 26], 1, Concat, [1]],
+
+  [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],
+  [-2, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],
+  [-1, 1, Conv, [128, 3, 1, None, 1, nn.PReLU()]],
+  [[-1, -2, -3], 1, Concat, [1]],
+  [-1, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]], #60
+
+   
+   [44, 1, RepConv, [128, 3, 1, None, 1, nn.PReLU()]],
+   [52, 1, RepConv, [256, 3, 1, None, 1, nn.PReLU()]],
+   [60, 1, RepConv, [512, 3, 1, None, 1, nn.PReLU()]],
+
+   [[61, 62, 63], 1, IDetect, [nc, anchors]],   # Detect(P3, P4, P5)
+  ]
