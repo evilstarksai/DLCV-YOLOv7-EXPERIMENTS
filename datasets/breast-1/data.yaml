@@ -1,6 +1,6 @@
-train: ../train/images
-val: ../valid/images
-test: ../test/images
+train: ../datasets/breast-1/train/images
+val: ../datasets/breast-1/valid/images
+test: ../datasets/breast-1/test/images
 
 nc: 1
 names: ['0']
