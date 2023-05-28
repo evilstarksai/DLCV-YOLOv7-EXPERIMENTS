@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 4
+names: ['Defect', 'Welding Line', 'Workpiece', 'porosity']
+
+roboflow:
+  workspace: weld-1-mba6s
+  project: final-dataset-rc2vm
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/weld-1-mba6s/final-dataset-rc2vm/dataset/1
