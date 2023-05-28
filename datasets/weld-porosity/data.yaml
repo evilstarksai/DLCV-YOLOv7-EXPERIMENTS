@@ -1,6 +1,6 @@
-train: ../train/images
-val: ../valid/images
-test: ../test/images
+train: ../datasets/weld-porosity/train/images
+val: ../datasets/weld-porosity/valid/images
+test: ../datasets/weld-porosity/test/images
 
 nc: 4
 names: ['Defect', 'Welding Line', 'Workpiece', 'porosity']
