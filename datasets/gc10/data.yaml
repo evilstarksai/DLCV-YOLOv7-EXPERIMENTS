@@ -1,0 +1,16 @@
+# COCO 2017 dataset http://cocodataset.org
+
+# download command/URL (optional)
+#download: bash ./scripts/get_coco.sh
+
+# train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
+path: ../datasets/gc10
+train: ../datasets/gc10/images/train  # 118287 images
+val: ../datasets/gc10/images/val  # 5000 images
+test: ../datasets/gc10/images/test  # 20288 of 40670 images, submit to https://competitions.codalab.org/competitions/20794
+
+# number of classes
+nc: 12
+
+# class names
+names: ["3_yueyawan", "9_zhehen", "6_siban", "4_shuiban", "2_hanfeng", "7_yiwu", "5_youban", "8_yahen", "1_chongkong", "10_yaozhe", "10_yaozhed", "d"]

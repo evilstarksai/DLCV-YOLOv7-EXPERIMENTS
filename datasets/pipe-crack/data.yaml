@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 3
+names: ['crack', 'hole', 'impurity']
+
+roboflow:
+  workspace: yolov5-0f27k
+  project: yolov5-pipe-classification
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/yolov5-0f27k/yolov5-pipe-classification/dataset/1
