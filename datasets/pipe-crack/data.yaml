@@ -1,6 +1,6 @@
-train: ../train/images
-val: ../valid/images
-test: ../test/images
+train: ../datasets/pipe-crack/train/images
+val: ../datasets/pipe-crack/valid/images
+test: ../datasets/pipe-crack/test/images
 
 nc: 3
 names: ['crack', 'hole', 'impurity']

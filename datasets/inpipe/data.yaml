@@ -1,6 +1,6 @@
-train: ../train/images
-val: ../valid/images
-test: ../test/images
+train: ../datasets/inpipe/train/images
+val: ../datasets/inpipe/valid/images
+test: ../datasets/inpipe/test/images
 
 nc: 8
 names: ['Root_blockage', 'encrustation', 'ferrule', 'joint', 'pipe_surface_damage', 'shape_deformation', 'sluge accumulation', 'stone']
@@ -11,3 +11,5 @@ roboflow:
   version: 2
   license: CC BY 4.0
   url: https://universe.roboflow.com/solinas-xml-to-txt/kapilproject/dataset/2
+
+  
