@@ -1,0 +1,15 @@
+train: ../datasets/inpipe-defects/color/train/images
+val: ../datasets/inpipe-defects/color/valid/images
+test: ../datasets/inpipe-defects/color/test/images
+
+
+
+nc: 2
+names: ['Crack', 'Fracture']
+
+roboflow:
+  workspace: tim-muller
+  project: defects-hpfeg
+  version: 12
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/tim-muller/defects-hpfeg/dataset/12
